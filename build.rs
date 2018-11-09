@@ -26,7 +26,7 @@ fn get_rustc_version() -> Result<(i32, i32), Box<Error>> {
 }
 
 fn rustc_has_unix_socket() -> bool {
-    if !cfg!(unix) {
+    if cfg!(target_os = "windows") || cfg!(target_os = "macos") || cfg!(target_os = "ios") {
         false
     } else {
         if let Ok((major, minor)) = get_rustc_version() {
